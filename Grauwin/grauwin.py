@@ -1,7 +1,13 @@
 # Ségrégation spatiale et main invisible (Grauwin & Jensen)
 
+
 import numpy as np
 from random import randint
+
+from numpy.random import binomial
+from math import exp
+
+
 from classes import Ville, Paramètres
 
 
@@ -26,3 +32,35 @@ def init_ville (p) :
     
     return Ville(ville,densites)
  
+        
+        
+# On définit ensuite une fonction qui actualise une ville en proposant à un individu au hasard de déménager. Cette fonction modifie directement la ville et ne renvoie rien.
+    
+
+def actualise (ville,p) :
+    h=p.h
+    # On commence par choisir un individu et une emplacement vacant au hasard (dans un quartier différent)
+    indiv = (-1,-1)
+    emplacement = (-1,-1)
+    while indiv == (-1,-1) :
+        i , j = randint(0,p.l-1) , randint(0,p.l-1)
+        if ville.ville[i,j]!=0 :
+            indiv = (i,j)
+    while emplacement == (-1,-1) :
+        i , j = randint(0,p.l-1) , randint(0,p.l-1)
+        if all([ville.ville[i,j]==0, (indiv[0]//h)-1 != (i//h)-1, (indiv[1]//h)-1 != (j//h)-1]) :
+            emplacement = (i,j)
+    print(indiv,emplacement)        
+    # Ensuite, on propose à cet individu de déménager selon une loi de logit
+    H = (p.h)**2
+    u=p.u
+    u1 = u(ville.densites[(indiv[0]//h-1), (indiv[1]//h-1)])
+    u2 = u(ville.densites[(emplacement[0]//h-1), (emplacement[1]//h-1)]) + 1/H
+    p = 1 / (1 + exp(- (u2-u1) / p.T))
+    if binomial(1,1-p) :
+        ville.ville[indiv[0],indiv[1]] = 0
+        ville.ville[emplacement[0],emplacement[1]] = 1
+        ville.densites[indiv[0]//h-1,indiv[1]//h-1] -= 1/H
+        ville.densites[emplacement[0]//h-1,emplacement[1]//h-1] += 1/H
+
+        
