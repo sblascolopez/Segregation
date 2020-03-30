@@ -6,12 +6,13 @@
 class Paramètres :
     """ Classe regroupant tous les paramètres d'une simulation """
     
-    def __init__ (self,q,h,m,alpha = 0) :
+    def __init__ (self,q,h,T,m,alpha = 0) :
         self.q = q  # définit le nombre de quartier Q = q²
         self.h = h  # définit le nombre d'emplacements par quartiers H = h²
         self.l = h*q  # taille de la ville 
         
         self.N = ((h*q)**2)/2  # Nombre d'agents initialement 
+        self.T = T # Contrainte caractérisant l'ancrage des individus dans leur quartier
         self.alpha = alpha  # Coefficient intégrant l'altruisme
         
         self.u = lambda x : 2*x if x <= 1/2 else (2*(m-1)*x+2-m) # Fonction d'utilité des agents
