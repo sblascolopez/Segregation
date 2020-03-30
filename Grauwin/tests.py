@@ -1,6 +1,7 @@
 # On définit ici différents tests unitaires pour vérifier le fonctionnement des fonctions principales 
     
 import unittest
+import numpy as np
 
 from classes import Ville, Paramètres
 from grauwin import init_ville
