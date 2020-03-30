@@ -12,7 +12,7 @@ class Test(unittest.TestCase) :
     #Test de la fonction init_ville : 
     #On vérifie que la ville créée par init_ville pour 4 quartiers de 9 emplacements, contient bien 18 individus
     def test_init_ville(self):
-        p=Paramètres(2,3,1)
+        p=Paramètres(2,3,1,1)
         ville = init_ville(p)   
         self.assertEqual(np.sum(ville.ville),18)
         
