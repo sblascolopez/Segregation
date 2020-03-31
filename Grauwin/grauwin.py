@@ -57,7 +57,7 @@ def actualise (ville,p) :
     u1 = u(ville.densites[(indiv[0]//h-1), (indiv[1]//h-1)])
     u2 = u(ville.densites[(emplacement[0]//h-1), (emplacement[1]//h-1)]) + 1/H
     p = 1 / (1 + exp(- (u2-u1) / p.T))
-    if binomial(1,1-p) :
+    if binomial(1,p) :
         ville.ville[indiv[0],indiv[1]] = 0
         ville.ville[emplacement[0],emplacement[1]] = 1
         ville.densites[indiv[0]//h-1,indiv[1]//h-1] -= 1/H
