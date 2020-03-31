@@ -15,7 +15,7 @@ def init_figure (p) :
     ax.set_yticklabels([])
     ax.set_aspect("equal")
     #On trace chacune des frontières des quartiers :
-    for i in range(1,p.q+1) :
+    for i in range(1,p.q) :
         plt.axvline(x=i*p.h,color='black')
         plt.axhline(y=i*p.h,color='black')
     plt.show()
