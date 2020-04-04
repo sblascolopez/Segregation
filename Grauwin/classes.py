@@ -11,12 +11,12 @@ class Paramètres :
         self.h = h  # définit le nombre d'emplacements par quartiers H = h²
         self.l = h*q  # taille de la ville 
         
-        self.N = ((h*q)**2)/2  # Nombre d'agents initialement 
+        self.N = ((h*q)**2)//2  # Nombre d'agents initialement 
         self.T = T # Contrainte caractérisant l'ancrage des individus dans leur quartier
         self.alpha = alpha  # Coefficient intégrant l'altruisme
         
         self.u = lambda x : 2*x if x <= 1/2 else (2*(m-1)*x+2-m) # Fonction d'utilité des agents
-
+        
 
 class Ville :
     """Classe regroupant toutes les caractéristiques de la ville d'une simulation :
@@ -35,8 +35,9 @@ def U(ville,p) :
     s = 0
     for i in range(p.q) :
         for j in range(p.q) :
-            rho = ville.densites[i,j]
-            s+= rho * p.u(rho)
+            if ville.ville[i,j] != 0 :
+                rho = ville.densites[i,j]
+                s+= rho * p.u(rho)
     H = (p.h)**2
     return s * H
             
