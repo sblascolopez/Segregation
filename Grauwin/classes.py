@@ -35,9 +35,8 @@ def U(ville,p) :
     s = 0
     for i in range(p.q) :
         for j in range(p.q) :
-            if ville.ville[i,j] != 0 :
-                rho = ville.densites[i,j]
-                s+= rho * p.u(rho)
+            rho = ville.densites[i,j]
+            s+= rho * p.u(rho)
     H = (p.h)**2
     return s * H
             

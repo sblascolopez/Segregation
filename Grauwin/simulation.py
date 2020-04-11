@@ -1,11 +1,13 @@
 # On crée ici un programme permettant de réaliser et de visualiser une simulation 
 
+
 from classes import Ville, Paramètres
 from grauwin import init_ville, actualise
 
 import matplotlib.pyplot as plt 
 from matplotlib.colors import ListedColormap
 from matplotlib.animation import FuncAnimation
+
 
 
 #Commençons par une fonction qui représente une ville donnée en arguments
@@ -43,10 +45,31 @@ def simulation (p,i_max,nb_graph) :  #choisis de sorte que i_max divisible par (
         trace_ville(ville,p,i)
     
     
-#Test :
-        
-p=Paramètres(5,10,0.1,0,0.2)
+    
+#Enfin, afin de faciliter la prise en main du programme, on crée une fonction qui est appelée quand on exécute le programme, et qui demande à l'utilisateur les différents paramètres de la simulation qu'il souhaite effectuer
 
-simulation(p,8000,5)
-           
+def realise_simulation () :
+    q = int(input("Racine q du nombre de quartiers (il y aura Q=q² quartiers) : "))
+    h = int(input("Racine h du nombre d'emplacements par quartier (il y aura H=h² quartiers) : "))
+    T = float(input("Paramètre T représentant les contraintes des individus s'opposant à leur déménagement :"))
+    m = float(input("Utilité m d'habiter dans un quartier complètement rempli (0≤m≤1) :"))
+    alpha = float(input("Fraction α de la population altruiste :"))
+    p = Paramètres(q,h,T,m,alpha)
+    i_max = int(input("Nombre i_max d'itérations lors de la simulation :"))
+    nb_graph = int(input("Nombre n de graphes souhaités (tel que i_max soit divisible par n-1) :"))
+    simulation(p,i_max,nb_graph)
+
+
+realise_simulation()
+
 plt.show()
+
+
+
+#Test
+#       
+#p=Paramètres(5,10,0.1,0,0.2)
+#
+#simulation(p,8000,5)
+#           
+#plt.show()
