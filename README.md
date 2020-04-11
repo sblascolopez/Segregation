@@ -1,4 +1,4 @@
-# Ségrégation
+# Modèles de ségrégation
 
 Ce projet, réalisé par Victor Huynh et Solène Blasco Lopez, présente différents modèles de ségrégation :
 
