@@ -6,7 +6,6 @@ from grauwin import init_ville, actualise
 
 import matplotlib.pyplot as plt 
 from matplotlib.colors import ListedColormap
-from matplotlib.animation import FuncAnimation
 
 
 

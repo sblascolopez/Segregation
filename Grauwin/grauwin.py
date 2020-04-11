@@ -11,6 +11,7 @@ from math import exp
 from classes import Ville, Paramètres, U
 
 
+
 # Définissions une première fonction qui initialise la simulation en créant une ville avec une répartition aléatoire des individus
         
 def init_ville (p) :
@@ -79,6 +80,13 @@ def actualise (ville,p) :
         ville.densites[(indiv[0]//h)-1,(indiv[1]//h)-1] -= 1/H
         ville.densites[(emplacement[0]//h)-1,(emplacement[1]//h)-1] += 1/H
 
-        
-    
+   
+     
+# Ainsi, le programme permettant de réaliser une simulation peut s'écrire simplement de la manière suivante 
+
+def grauwin (p, n_iter) :  #n_iter est le nombre d'itérations
+    ville = init_ville (p)
+    for i in range(n_iter) :
+        actualise(ville,p)
+    return ville
     
