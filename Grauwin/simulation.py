@@ -31,6 +31,7 @@ def trace_ville (ville,p,i) :  # i est le numéro de la figure
     plt.draw()
 
 
+
 #Ensuite, on crée une fonction qui réalise la simulation, et affiche l'état de la ville à intervalle de temps régulier.
 #On lui donne en argument les paramètres, le nombre d'itérations et le nombre de graphiques souhaités
 
@@ -42,6 +43,13 @@ def simulation (p,i_max,nb_graph) :  #choisis de sorte que i_max divisible par (
         for j in range(sub_i) :
             actualise(ville,p)
         trace_ville(ville,p,i)
+    
+    
+#Exemple
+#       
+#p=Paramètres(5,10,0.1,0,0.2)
+#simulation(p,8000,5)           
+#plt.show()   
     
     
     
@@ -59,16 +67,5 @@ def realise_simulation () :
     simulation(p,i_max,nb_graph)
 
 
-realise_simulation()
-
-plt.show()
-
-
-
-#Test
-#       
-#p=Paramètres(5,10,0.1,0,0.2)
-#
-#simulation(p,8000,5)
-#           
+#realise_simulation()
 #plt.show()
