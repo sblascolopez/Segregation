@@ -21,13 +21,17 @@ def trace_ville (ville,p,i) :  # i est le numéro de la figure
     ax.set_aspect("equal")
     
     #On trace chacune des frontières des quartiers :
-    for i in range(1,p.q) :
-        plt.axvline(x=i*p.h-0.5,color='black')
-        plt.axhline(y=i*p.h-0.5,color='black')
+    for j in range(1,p.q) :
+        plt.axvline(x=j*p.h-0.5,color='black')
+        plt.axhline(y=j*p.h-0.5,color='black')
     
     #On place ensuite les individus :
-    cmap = ListedColormap([(1,1,1),(1,0,0),(0,1,0)])
+    if p.alpha == 0 :
+        cmap = ListedColormap([(1,1,1),(1,0,0)])
+    else :
+        cmap = ListedColormap([(1,1,1),(1,0,0),(0,1,0)])
     img = plt.imshow(ville.ville, cmap=cmap)
+    plt.title("Etape "+str(i))
     plt.draw()
 
 
@@ -45,11 +49,10 @@ def simulation (p,i_max,nb_graph) :  #choisis de sorte que i_max divisible par (
         trace_ville(ville,p,i)
     
     
-#Exemple
-#       
-#p=Paramètres(5,10,0.1,0,0.2)
-#simulation(p,8000,5)           
-#plt.show()   
+#Exemple:    
+p=Paramètres(5,10,1,0.2,0.1)
+simulation(p,8000,5)  #réalise 5 graphiques, espacés chacun de 2000 itérations         
+plt.show()  
     
     
     
@@ -67,5 +70,5 @@ def realise_simulation () :
     simulation(p,i_max,nb_graph)
 
 
-#realise_simulation()
-#plt.show()
+if __name__ == '__main__':
+    realise_simulation () 
