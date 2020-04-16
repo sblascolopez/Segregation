@@ -53,20 +53,20 @@ def actualise (ville,p) :
     emplacement = (-1,-1)
     while indiv == (-1,-1) :
         i , j = randint(0,p.l-1) , randint(0,p.l-1)
-        if ville.ville[i,j]!=0 :
+        if ville.ville[i,j] != 0 :
             indiv = (i,j)
     while emplacement == (-1,-1) :
         i , j = randint(0,p.l-1) , randint(0,p.l-1)
-        if all([ville.ville[i,j]==0, (indiv[0]//h)-1 != (i//h)-1, (indiv[1]//h)-1 != (j//h)-1]) :  #s'assure que l'emplacement est vide et dans un quartier différent. L'avantage de la fonction all est que l'exécution s'arrête dès qu'une condition n'est pas remplie (gain de temps)
+        if all([ville.ville[i,j]==0, (indiv[0]//h) != (i//h), (indiv[1]//h) != (j//h)]) :  #s'assure que l'emplacement est vide et dans un quartier différent. L'avantage de la fonction all est que l'exécution s'arrête dès qu'une condition n'est pas remplie (gain de temps)
             emplacement = (i,j)
                   
     # Ensuite, on calcule les nouvelles et anciennes densités avant (0) et après (1) déménagement, dans le quartier de départ (i) et celui d'arrivée (e), pour en déduire les différences d'utilité
     H = (p.h)**2
     u=p.u
     
-    rho_i0 = ville.densites[(indiv[0]//h)-1,(indiv[1]//h)-1]
+    rho_i0 = ville.densites[(indiv[0]//h),(indiv[1]//h)]
     rho_i1 = rho_i0 - 1/H
-    rho_e0 = ville.densites[(emplacement[0]//h)-1,(emplacement[1]//h)-1]
+    rho_e0 = ville.densites[(emplacement[0]//h),(emplacement[1]//h)]
     rho_e1 = rho_e0 + 1/H
     
     if ville.ville[indiv[0],indiv[1]] == 1 :  #individu égoïste 
@@ -78,8 +78,8 @@ def actualise (ville,p) :
     p = 1 / (1 + exp( - (delta_u) / p.T))
     if binomial(1,p) :  #renvoie 1 (déménagement) avec la probabilité p, et 0 (non déménagement) sinon
         ville.ville[indiv[0],indiv[1]], ville.ville[emplacement[0],emplacement[1]] = ville.ville[emplacement[0],emplacement[1]], ville.ville[indiv[0],indiv[1]]
-        ville.densites[(indiv[0]//h)-1,(indiv[1]//h)-1] -= 1/H
-        ville.densites[(emplacement[0]//h)-1,(emplacement[1]//h)-1] += 1/H
+        ville.densites[(indiv[0]//h),(indiv[1]//h)] -= 1/H
+        ville.densites[(emplacement[0]//h),(emplacement[1]//h)] += 1/H
 
    
      
