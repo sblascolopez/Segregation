@@ -20,7 +20,7 @@ class Paramètres :
 
 class Ville :
     """Classe regroupant toutes les caractéristiques de la ville d'une simulation :
-        - la ville, sous la forme d'une grille de taille l * l, contenant des 0 si l'emplacement est occupé, des 1 s'il est occupé
+        - la ville, sous la forme d'une grille de taille l * l, contenant : 0 si l'emplacement est vide, 1 s'il est occupé par un habitant égoiste, 2 s'il est occupé par un habitant altruiste
         - les densités de chaque quartier, sous la forme d'une grille q*q
     """
     
