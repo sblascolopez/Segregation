@@ -65,10 +65,13 @@ def cout_q () :
     for q in range(1,51) :
         p = Paramètres(q,h,T,m,alpha)
         x.append(log(q))
-        t=time()
-        init_ville(p)   
-        t=time()-t
-        y.append(log(t))
+        y_moyen = 0
+        for i in range(30) : #On réalise 100 simulations pour chaque point
+            t=time()
+            init_ville(p)   
+            t=time()-t
+            y_moyen+=t
+        y.append(log(y_moyen/30))
     #Réalisons ensuite une régression linéaire pour trouver a et b tels que log(t) = a*log(h) + b :
     regressor = LinearRegression()
     X = [[i] for i in x]
@@ -80,7 +83,7 @@ def cout_q () :
     #On trace ensuite les points obtenus en effectuant les simulations, et la droite obtenue par régression linéaire. 
     plt.plot(x,y, label = "log(t) en fonction de log(q)")
     plt.plot(x,y_droite, label = "log(t)="+str(a)+"log(q)+"+str(b)+", r² ="+str(r2))
-    plt.title("Temps d'exécution t en fonction du nombre de quartiers q² (50 points)")
+    plt.title("Temps d'exécution t en fonction du nombre de quartiers q² (50 points créés à partir de 30 simulations chacuns)")
     plt.xlabel("log(q)")
     plt.ylabel("log(t) (t en secondes)")
     plt.legend()
@@ -96,10 +99,13 @@ def cout_h () :  #Même fonction que cout_q en remplaçant q par h
     for h in range(10,101) :   #on enlève les petites valeurs pour ne pas avoir un temps trop petit (et un problème lors du passage au log)
         p = Paramètres(q,h,T,m,alpha)
         x.append(log(h))
-        t=time()
-        init_ville(p)
-        t=time()-t
-        y.append(log(t))
+        y_moyen = 0
+        for i in range(30) : #On réalise 100 simulations pour chaque point
+            t=time()
+            init_ville(p)   
+            t=time()-t
+            y_moyen+=t
+        y.append(log(y_moyen/30))
     #Réalisons ensuite une régression linéaire pour trouver a et b tels que log(t) = a*log(h) + b :
     regressor = LinearRegression()
     X = [[i] for i in x]
@@ -111,7 +117,7 @@ def cout_h () :  #Même fonction que cout_q en remplaçant q par h
     #On trace ensuite les points obtenus en effectuant les simulations, et la droite obtenue par régression linéaire. 
     plt.plot(x,y, label = "log(t) en fonction de log(h)")
     plt.plot(x,y_droite, label = "log(t)="+str(a)+"log(h)+"+str(b)+", r² ="+str(r2))
-    plt.title("Temps d'exécution t en fonction du nombre d'emplacements par quartiers h² (90 points)")
+    plt.title("Temps d'exécution t en fonction du nombre d'emplacements par quartiers h² (90 points créés à partir de 30 simulations chacuns)")
     plt.xlabel("log(h)")
     plt.ylabel("log(t) (t en secondes)")
     plt.legend()  
